@@ -10,7 +10,7 @@ foreach(cmakeFile ${cmakeFiles})
     include(${cmakeFile})
 endforeach(cmakeFile)
 
-project(${PROJECT})
+project(${PROJECT} VERSION ${VERSION})
 
 include(CMakePackageConfigHelpers)
 include(GNUInstallDirs)
@@ -29,6 +29,12 @@ if(BUILD_TESTING)
     # enable_testing()
     include(CTest)
 endif()
+
+configure_file(
+    "${PROJECT_SOURCE_DIR}/version.h.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/include/version.h"
+)
+include_directories("${CMAKE_CURRENT_BINARY_DIR}/include")
 
 include(dependecies.cmake)
 include(targets.cmake)

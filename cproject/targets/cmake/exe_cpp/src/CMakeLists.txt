@@ -17,13 +17,10 @@ target_link_libraries({{ TARGET }}_exe PRIVATE ${{{ TARGET }}_LIBS})
 
 install(
     TARGETS {{ TARGET }}_exe
-    EXPORT ${PROJECT}
+    COMPONENT Runtime
 )
 
-# ---- Install rules ----
-
-# if(NOT CMAKE_SKIP_INSTALL_RULES)
-#   include(cmake/install-rules.cmake)
-# endif()
-
-# include(cmake/dev-mode.cmake)
+# Tests
+if(BUILD_TESTING AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/tests/CMakeLists.txt")
+    add_subdirectory(tests)
+endif()

@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include <version.h>
+
 /**
  * @brief The core implementation of the executable
  *
@@ -15,7 +17,7 @@ struct library {
      * @brief Simply initializes the name member to the name of the project
      */
     library()
-        : name {"{{ TARGET }}"}
+        : name {"{{ TARGET }} version " + std::string(VERSION)}
     {
     }
 

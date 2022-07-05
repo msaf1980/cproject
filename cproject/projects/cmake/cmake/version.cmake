@@ -1,0 +1,7 @@
+macro(version_expand VERSION)
+    if(VERSION STREQUAL "")
+        if(EXISTS "${PROJECT_SOURCE_DIR}/.git")
+            git_describe(VERSION --tags --dirty=-d)
+        endif()
+    endif()
+endmacro()
