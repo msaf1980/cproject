@@ -9,7 +9,6 @@ set_target_properties(
 
 set(
     {{ TARGET }}_LIBS
-    ${PROFILE_LIB}
 )
 
 target_compile_features({{ TARGET }}_exe PRIVATE ${PROJECT_COMPILE_FEATURES})

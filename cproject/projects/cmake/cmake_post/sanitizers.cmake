@@ -1,37 +1,3 @@
-# if(CMAKE_COMPILER_IS_GNU OR CMAKE_COMPILER_IS_CLANG)
-
-# # None Debug Release Coverage ASan ASanDbg MemSan MemSanDbg TSan TSanDbg" if(CMAKE_BUILD_TYPE
-# STREQUAL "Coverage") if(CMAKE_COMPILER_IS_GNU OR CMAKE_COMPILER_IS_CLANG)
-# set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} --coverage") set(CMAKE_CXX_FLAGS
-# "${CMAKE_CXX_FLAGS} --coverage") set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} --coverage")
-# endif(CMAKE_COMPILER_IS_GNU OR CMAKE_COMPILER_IS_CLANG) endif(CMAKE_BUILD_TYPE STREQUAL
-# "Coverage")
-
-# if(CMAKE_BUILD_TYPE STREQUAL "ASan") set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address
-# -fsanitize=undefined -fno-common" ) set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fsanitize=address
-# -fsanitize=undefined -fno-common") set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS}
-# -lasan -lubsan") set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lasan -lubsan")
-# endif(CMAKE_BUILD_TYPE STREQUAL "ASan")
-
-# if(CMAKE_BUILD_TYPE STREQUAL "ASanDbg") set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}
-# ${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address -fsanitize=undefined -fno-common
-# -fno-omit-frame-pointer -fno-optimize-sibling-calls -O0" ) set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}
-# ${CMAKE_C_FLAGS_DEBUG} -fsanitize=address -fsanitize=undefined -fno-common -fno-omit-frame-pointer
-# -fno-optimize-sibling-calls -O0" ) # list( APPEND LIBRARIES asan ubsan )
-# set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -lasan -lubsan")
-# set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lasan -lubsan") add_definitions(-DDEBUG)
-# set(DEBUGINFO ON) endif(CMAKE_BUILD_TYPE STREQUAL "ASanDbg")
-
-# if(CMAKE_BUILD_TYPE STREQUAL "Debug") set(DEBUGINFO ON) set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}
-# -O0") set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0") add_definitions(-DDEBUG) endif(CMAKE_BUILD_TYPE
-# STREQUAL "Debug")
-
-# if(DEBUGINFO) string(FIND CMAKE_CXX_FLAGS " -g" res) if(res EQUAL -1) set(CMAKE_CXX_FLAGS
-# "${CMAKE_CXX_FLAGS} -g") endif(res EQUAL -1) string(FIND CMAKE_C_FLAGS " -g" res) if(res EQUAL -1)
-# set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g") endif(res EQUAL -1) endif()
-
-# endif(CMAKE_COMPILER_IS_GNU OR CMAKE_COMPILER_IS_CLANG)
-
 set(SANITIZERS_LIST
     "Address"
     "Memory"

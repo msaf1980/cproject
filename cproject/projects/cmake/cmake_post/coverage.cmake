@@ -1,0 +1,10 @@
+option(TEST_COVERAGE "Enable test coverage" OFF)
+
+if(TEST_COVERAGE)
+    if(CMAKE_COMPILER_IS_GNU OR CMAKE_COMPILER_IS_CLANG)
+        add_compile_options(-fprofile-arcs -ftest-coverage)
+        add_link_options(-fprofile-arcs -ftest-coverage)
+    else()
+        message(WARNING "Cannot enable test coverage on non GCC/Clang compilers.")
+    endif()
+endif()

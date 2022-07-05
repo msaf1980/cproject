@@ -7,21 +7,19 @@ set(PROFILE
     CACHE STRING "Enable profiler. Options are: ${PROFILERS}"
 )
 
+# Don't forget link application with this lib, need for some profilers like gperftools
+set(PROFILE_LIB)
+
 if(PROFILE)
     string(TOLOWER "${PROFILE}" PROFILE_l)
     if(PROFILE_l STREQUAL "gperftools")
-        if(CMAKE_COMPILER_IS_GNU OR CMAKE_COMPILER_IS_CLANG)
-            add_exe_linker_flag("-lprofiler")
-        else()
-            message(
-                FATAL_ERROR
-                    "Profile with ${PROFILE} is not supported on this platform (${CMAKE_C_COMPILER_ID})."
-            )
-        endif()
+        # overwrite PROFILE_LIB if non-system gperftools is needed
+        set(PROFILE_LIB "profiler")
+        message(STATUS "\nFor use gperftools don't forget link application with library in PROFILE_LIB variable\n")
     elseif(PROFILE_l STREQUAL "prof")
         if(CMAKE_COMPILER_IS_GNU OR CMAKE_COMPILER_IS_CLANG)
             add_compile_options(-p)
-            add_exe_linker_flag("-p")
+            add_link_options(-p)
         else()
             message(
                 FATAL_ERROR
@@ -31,7 +29,7 @@ if(PROFILE)
     elseif(PROFILE_l STREQUAL "gprof")
         if(CMAKE_COMPILER_IS_GNU OR CMAKE_COMPILER_IS_CLANG)
             add_compile_options(-pg)
-            add_exe_linker_flag("-pg")
+            add_link_options(-pg)
         else()
             message(
                 FATAL_ERROR
