@@ -132,6 +132,8 @@ def populate(source_dir, dest_dir, vars, root_exist=False):
 
 
 def project_type(project_dir):
+    if not os.path.isdir(project_dir):
+        raise ValueError("project dir not exist")
     for ptype in Project.TYPES:
         project_files = Project.TYPES[ptype]
         for f in project_files:
@@ -329,8 +331,12 @@ def parse_cmdline(template_dirs):
                         action='store', default='0.1', help='project version')
     parser.add_argument('-s', '--templates', type=str, dest='template_dir', action='store', default=None,
                         help='template dir (default in %s)' % str(template_dirs))
+    parser.add_argument('-C', '--cxx-std', dest='cxx_std',
+                           action='store', type=int, help='Pass C++ standart version as CXX_STD variable (for example 11, 17, 20 or 23)')
+    parser.add_argument('-c', '--c-std', dest='c_std',
+                           action='store', type=int, help='Pass C standart version as C_STD variable (for example 99, 11, 17, 20 or 23)')
 
-    subparsers = parser.add_subparsers(help='types of arguments')
+    subparsers = parser.add_subparsers(help='types of arguments', dest='which')
 
     list_parser = subparsers.add_parser('list', help='List all templates')
     list_parser.add_argument_group('list')
@@ -339,10 +345,6 @@ def parse_cmdline(template_dirs):
     new_group = new_parser.add_argument_group('new')
     new_group.add_argument('-t', '--template', dest='template',
                            action='store', required=True, help='create project from template')
-    new_group.add_argument('-C', '--cxx-std', dest='cxx_std',
-                           action='store', type=int, default=0, help='C++ standart version (for example 11, 17, 20 or 23)')
-    new_group.add_argument('-c', '--c-std', dest='c_std',
-                           action='store', type=int, default=0, help='C standart version (for example 99, 11, 17, 20 or 23)')
     new_group.add_argument('project', nargs="+", help=PROJECT_FORMAT)
     new_group.add_argument('-T', '--target', dest='target',
                            action='append', help=TARGET_FORMAT)
@@ -369,14 +371,14 @@ def main():
     project_templates = Projects(template_dirs)
     target_templates = Targets(template_dirs)
 
-    if hasattr(args, 'project'):
+    if args.which == 'new': # new project
         p = project_templates.get(args.template)
         for project in args.project:
             vars = dict()
             vars['{{ VERSION }}'] = args.version
-            if args.cxx_std > 0:
+            if not args.cxx_std is None:
                 vars['{{ CXX_STD }}'] = str(args.cxx_std)
-            if args.c_std > 0:
+            if not args.c_std is None:
                 vars['{{ C_STD }}'] = str(args.c_std)
             project_dir, project_name = split_project(project)
             p.create(project_dir, project_name, vars)
@@ -387,12 +389,12 @@ def main():
                         target)
                     t = target_templates.get_by_type(ptype, target_template)
                     t.create(project_dir, target_name, dir_in_project, vars)
-    elif hasattr(args, 'target'):
+    elif args.which == 'add': # Add target to project
         vars = dict()
         vars['{{ VERSION }}'] = args.version
-        if args.cxx_std > 0:
+        if not args.cxx_std is None:
             vars['{{ CXX_STD }}'] = str(args.cxx_std)
-        if args.c_std > 0:
+        if not args.c_std is None:
             vars['{{ C_STD }}'] = str(args.c_std)
         ptype = project_type(args.dir)
         for target in args.target:
