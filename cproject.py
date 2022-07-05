@@ -46,16 +46,11 @@ class Template:
         while idx >= 0:
             result.append(s[pos:idx])
             end = s.find(' %}', idx+5)
-            # end = s.find('{%endif%}', idx+5)
             if end == -1:
                 raise ValueError(
                     "unclosed if block: {}".format(substr(s, idx, 50)))
-            # sys.stderr.write(s[idx+5:end]+'\n')
-            # sys.stderr.write(str(result)+'\n')
             try:
-                # sys.stderr.write(s[idx+5:end])
                 add_block = eval(s[idx+5:end])
-                # sys.stderr.write(', expand = ' + str(add_block) + '\n')
             except Exception:
                 if s[idx+5:end].find('{{') == -1:
                     raise ValueError(
