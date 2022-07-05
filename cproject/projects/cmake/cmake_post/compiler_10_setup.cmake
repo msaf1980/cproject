@@ -35,3 +35,7 @@ if(COMPILER_EFFECTIVE_CXX)
         add_compile_options_cxx("-Weffc++")
     endif()
 endif()
+
+if(DEBUGINFO)
+
+endif()

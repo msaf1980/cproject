@@ -4,3 +4,4 @@ option(COMPILER_WARNINGS_AS_ERROR "Make all warnings into errors" OFF)
 option(COMPILER_EFFECTIVE_CXX "Enable Effective C++ warnings" OFF)
 option(COMPILER_REQUIRE_ISO_CXX "Require ISO C/C++" OFF)
 
+option(DEBUGINFO "Add compiler debuginfo" OFF)

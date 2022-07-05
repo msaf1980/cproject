@@ -1,6 +1,5 @@
 option(COVERAGE "Enable test coverage" OFF)
 
-
 # Reports stored in ${CMAKE_BINARY_DIR}/coverage directory, old report saved in ${CMAKE_BINARY_DIR}/coverage.old
 # In example, Ninja is used (not required) 
 ################################################################
