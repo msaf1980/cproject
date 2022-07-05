@@ -8,7 +8,7 @@ message(STATUS "  C++ Compiler          : ${CMAKE_CXX_COMPILER} (${CMAKE_CXX_COM
 message(STATUS "  Build type            : ${CMAKE_BUILD_TYPE}")
 message(STATUS "  Build tests           : ${BUILD_TESTING}")
 message(STATUS "  Build benchmarks      : ${BUILD_BENCH}")
-message(STATUS "  Test coverage         : ${TEST_COVERAGE}")
+message(STATUS "  Test coverage         : ${COVERAGE}")
 message(STATUS "  Sanitizer             : ${SANITIZER}")
 message(STATUS "")
 message(STATUS "  Install prefix : ${CMAKE_INSTALL_PREFIX}")
