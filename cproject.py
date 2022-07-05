@@ -310,26 +310,6 @@ class Targets:
         return self.map[project_type + ':' + name]
 
 
-# def get_descr(dir):
-#     dpath = os.path.join(dir, '.DESCRIPTION')
-#     if os.path.isfile(dpath):
-#         with open(dpath, 'r') as fd:
-#             return fd.readline().strip()
-
-
-# def parse_target_type(target_template):
-#     indx = target_template.find(':')
-#     if indx == -1:
-#         return None, None, target_template
-
-#     project_type = target_template[:indx]
-#     project_files = PROJECT_TYPES.get(project_type)
-#     if project_files is None:
-#         return None, None, target_template
-
-#     return project_type, project_files, target_template[indx+1:]
-
-
 def template_expand(source, dest, vars):
     if len(dest) == 0:
         raise ValueError("destination not set for template {}".format(source))
