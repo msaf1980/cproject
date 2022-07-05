@@ -1,0 +1,2 @@
+set(PROJECT {{ PROJECT }})
+set(VERSION {{ VERSION }})
