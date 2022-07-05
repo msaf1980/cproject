@@ -15,6 +15,11 @@ target_compile_features({{ TARGET }}_exe PRIVATE ${PROJECT_COMPILE_FEATURES})
 
 target_link_libraries({{ TARGET }}_exe PRIVATE ${{{ TARGET }}_LIBS})
 
+install(
+    TARGETS {{ TARGET }}_exe
+    EXPORT ${PROJECT}
+)
+
 # ---- Install rules ----
 
 # if(NOT CMAKE_SKIP_INSTALL_RULES)

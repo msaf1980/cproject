@@ -12,6 +12,9 @@ endforeach(cmakeFile)
 
 project(${PROJECT})
 
+include(CMakePackageConfigHelpers)
+include(GNUInstallDirs)
+
 file(GLOB cmakeFiles cmake/*.cmake)
 foreach(cmakeFile ${cmakeFiles})
     message("INCLUDE ${cmakeFile}")
