@@ -37,5 +37,5 @@ if(COMPILER_EFFECTIVE_CXX)
 endif()
 
 if(DEBUGINFO)
-
+    add_compile_debuginfo()
 endif()
