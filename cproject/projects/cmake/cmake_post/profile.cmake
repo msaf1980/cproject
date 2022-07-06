@@ -8,13 +8,14 @@ set(PROFILE
 )
 
 # Don't forget link application with this lib, need for some profilers like gperftools
-set(PROFILE_LIB)
-
 if(PROFILE)
+    # Temporary for merge with OPTS_APP_LIBS and OPTS_TEST_LIBS
+    set(PROFILE_LIB)
+
     string(TOLOWER "${PROFILE}" PROFILE_l)
     if(PROFILE_l STREQUAL "gperftools")
         # overwrite PROFILE_LIB if non-system gperftools is needed
-        set(PROFILE_LIB "profiler")
+        set(PROFILE_LIB profiler)
         message(STATUS "\nFor use gperftools don't forget link application with library in PROFILE_LIB variable\n")
     elseif(PROFILE_l STREQUAL "prof")
         if(CMAKE_COMPILER_IS_GNU OR CMAKE_COMPILER_IS_CLANG)

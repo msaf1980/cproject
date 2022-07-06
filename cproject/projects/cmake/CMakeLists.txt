@@ -29,7 +29,14 @@ foreach(cmakeFile ${cmakeFiles})
     include(${cmakeFile})
 endforeach(cmakeFile)
 
-include(dependecies.cmake)
+# Include cmake script from cmake_dep dir (for setup dependecies)
+file(GLOB cmakeFiles cmake_dep/*.cmake)
+foreach(cmakeFile ${cmakeFiles})
+    message("INCLUDE ${cmakeFile}")
+    include(${cmakeFile})
+endforeach(cmakeFile)
+
+include(merge.cmake)
 
 if(DEFINED ENV{DEVENV})
     set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

@@ -1,11 +1,18 @@
 set(SANITIZERS_LIST
     "Address"
+    "ASan"
     "Memory"
+    "MSan"
     "MemoryWithOrigins"
+    "MSanWithOrigins"
     "Undefined"
+    "UBSan"
     "Thread"
+    "TSan"
     "Leak"
+    "LSAN"
     "Address,Undefined"
+    "ASAN,UBSan"
     "CFI"
     "Valgrind"
 )
@@ -22,14 +29,18 @@ set(SANITIZERS_LIST
 # Also VALGRIND_ENABLED=1 passed
 
 list(JOIN SANITIZERS_LIST " " SANITIZERS)
-  
+
 set(SANITIZER
     ""
-    CACHE STRING "Compile with a sanitizer. Options are: ${SANITIZERS}"
+    CACHE STRING "Compile with a sanitizer. Options are: ${SANITIZERS}, some of them are aliases, like Address and ASan"
 )
-
+string(TOLOWER "${SANITIZER}" SANITIZER_l)
+string(TOLOWER "${SANITIZERS_LIST}" SANITIZERS_LIST_l)
 if(SANITIZER)
-    if(NOT SANITIZER IN_LIST SANITIZERS_LIST)
+    # Temporary for merge with OPTS_APP_LIBS and OPTS_TEST_LIBS
+    set (SANITIZER_LIBS)
+
+    if(NOT SANITIZER_l IN_LIST SANITIZERS_LIST_l)
         message("Sanitizers: ${SANITIZERS}")
         message(FATAL_ERROR "This sanitizer not yet supported: ${SANITIZER}")
     endif()
@@ -41,7 +52,7 @@ if(SANITIZER)
         add_compile_options("-fno-omit-frame-pointer")
         add_compile_debuginfo()
 
-        if(SANITIZER MATCHES "([Vv]algrind)")
+        if(SANITIZER_l MATCHES "(valgrind)")
             find_program(MEMORYCHECK_COMMAND valgrind)
             add_definitions(-DVALGRIND_ENABLED=1)
             set(MEMORYCHECK_SUPPRESS "${PROJECT_SOURCE_DIR}/valgrind_suppress.txt" )
@@ -60,17 +71,17 @@ if(SANITIZER)
             )
         endif()
 
-        if(SANITIZER MATCHES "([Aa]ddress)")
+        if(SANITIZER_l MATCHES "(address)" OR SANITIZER_l MATCHES "(asan)")
             # Optional: -fno-optimize-sibling-calls -fsanitize-address-use-after-scope
             message(STATUS "Enable Address sanitizer")
-            add_compile_options("-fsanitize=address")
-            # add_exe_linker_flag("-lasan" "-lubsan")
+            add_compile_options(-fsanitize=address)
+            list(APPEND SANITIZER_LIBS asan)
 
             # if(AFL) append_quoteless( AFL_USE_ASAN=1 CMAKE_C_COMPILER_LAUNCHER
             # CMAKE_CXX_COMPILER_LAUNCHER ) endif()
         endif()
 
-        if(SANITIZER MATCHES "([Mm]emory([Ww]ith[Oo]rigins)?)")
+        if(SANITIZER_l MATCHES "(memory(withorigins)?)" OR SANITIZER_l MATCHES "(msan(withorigins)?)")
             if(CMAKE_COMPILER_IS_MSVC)
                 message(
                     FATAL_ERROR
@@ -78,7 +89,7 @@ if(SANITIZER)
                 )
             endif()
             # Optional: -fno-optimize-sibling-calls -fsanitize-memory-track-origins=2
-            add_compile_options("-fsanitize=memory")
+            add_compile_options(-fsanitize=memory -fPIE -pie)
             if(USE_SANITIZER MATCHES "([Mm]emory[Ww]ith[Oo]rigins)")
                 message(STATUS "Enable MemoryWithOrigins sanitizer")
                 add_compile_options("-fsanitize-memory-track-origins")
@@ -90,7 +101,7 @@ if(SANITIZER)
             # CMAKE_CXX_COMPILER_LAUNCHER ) endif()
         endif()
 
-        if(SANITIZER MATCHES "([Uu]ndefined)")
+        if(SANITIZER_l MATCHES "(undefined)" OR SANITIZER_l MATCHES "(ubsan)")
             if(CMAKE_COMPILER_IS_MSVC)
                 message(
                     FATAL_ERROR
@@ -98,8 +109,8 @@ if(SANITIZER)
                 )
             endif()
             message(STATUS "Enable with Undefined Behaviour sanitizer")
-            add_compile_options("-fsanitize=undefined")
-            # add_exe_linker_flag("-lubsan")
+            add_compile_options(-fsanitize=undefined)
+            list(APPEND SANITIZER_LIBS ubsan)
 
             # if(EXISTS "${BLACKLIST_FILE}") append("-fsanitize-blacklist=${BLACKLIST_FILE}"
             # SANITIZER_UB_FLAG) endif()
@@ -108,7 +119,7 @@ if(SANITIZER)
             # CMAKE_CXX_COMPILER_LAUNCHER ) endif()
         endif()
 
-        if(SANITIZER MATCHES "([Tt]hread)")
+        if(SANITIZER_l MATCHES "(thread)" OR SANITIZER_l MATCHES "(tsan)")
             if(CMAKE_COMPILER_IS_MSVC)
                 message(
                     FATAL_ERROR
@@ -117,13 +128,13 @@ if(SANITIZER)
             endif()
             message(STATUS "Enable Thread sanitizer")
             add_compile_options("-fsanitize=thread")
-            # add_exe_linker_flag("-ltsan")
+            list(APPEND SANITIZER_LIBS tsan)
 
             # if(AFL) append_quoteless( AFL_USE_TSAN=1 CMAKE_C_COMPILER_LAUNCHER
             # CMAKE_CXX_COMPILER_LAUNCHER ) endif()
         endif()
 
-        if(SANITIZER MATCHES "([Ll]eak)")
+        if(SANITIZER_l MATCHES "(leak)" OR SANITIZER_l MATCHES "(lsan)")
             if(CMAKE_COMPILER_IS_MSVC)
                 message(
                     FATAL_ERROR
@@ -137,7 +148,7 @@ if(SANITIZER)
             # CMAKE_CXX_COMPILER_LAUNCHER) endif()
         endif()
 
-        if(SANITIZER MATCHES "([Cc][Ff][Ii])")
+        if(SANITIZER_l MATCHES "(cfi)")
             if(CMAKE_COMPILER_IS_MSVC)
                 message(
                     FATAL_ERROR
@@ -145,7 +156,8 @@ if(SANITIZER)
                 )
             endif()
             message(STATUS "Testing with Control Flow Integrity(CFI) sanitizer")
-            add_compile_options("-fsanitize=cfi")
+            add_compile_options(-fsanitize=cfi -flto -fvisibility=hidden)
+            add_link_options(-flto)
 
             # if(AFL) append_quoteless(AFL_USE_CFISAN=1 CMAKE_C_COMPILER_LAUNCHER
             # CMAKE_CXX_COMPILER_LAUNCHER) endif()
