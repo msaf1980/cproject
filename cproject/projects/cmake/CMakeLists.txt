@@ -51,8 +51,8 @@ endforeach(cmakeFile)
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/merge.cmake)
 
-configure_file("${PROJECT_SOURCE_DIR}/version.h.in" "${CMAKE_CURRENT_BINARY_DIR}/include/version.h")
-include_directories("${CMAKE_CURRENT_BINARY_DIR}/include")
+configure_file("${PROJECT_SOURCE_DIR}/version.h.in" "${CMAKE_CURRENT_BINARY_DIR}/generated-includes/${PROJECT}/version.h")
+include_directories("${CMAKE_CURRENT_BINARY_DIR}/generated-includes")
 
 if(BUILD_TESTING)
     # enable_testing()

@@ -1,0 +1,3 @@
+description: Tests with Catch2 (> 3.0.0) (C++) (in tests directory of CMake project root, target is a project name)
+require:
+ - cmake_dep/Catch2_3_FetchContent.cmake

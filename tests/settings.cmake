@@ -1,7 +1,6 @@
-set(PROJECT {{PROJECT}})
-set(VERSION {{VERSION}})
-set(CXX_COMPILE_FEATURES{%if {{ CXX }} %} cxx_std_{{ CXX_STD }}{%endif%})
-set(C_COMPILE_FEATURES{%if {{ C_STD }} %} c_std_{{ C_STD }}{%endif%})
+set(PROJECT test)
+set(VERSION 0.1)
+set(PROJECT_COMPILE_FEATURES)
 
 if(CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     set(_CI_MODE ON)

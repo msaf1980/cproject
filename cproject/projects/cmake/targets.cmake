@@ -2,7 +2,7 @@
 
 # Default includes
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/include")
-    add_subdirectory(include)
+    include_directories(include)
 endif()
 
 # Default sources (for libs or apps, if no internal libs)
