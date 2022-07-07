@@ -230,7 +230,7 @@ class Project:
                 self.description == other.description
 
     def create(self, project_dir, project_name, vars, update=False):
-        vars['{{PROJECT}}'] = project_name
+        vars['{{PROJECT}}'] = project_name.upper()
         if update:
             sys.stdout.write("Updating project {} in {}\n".format(
                 project_name, project_dir))
@@ -317,7 +317,7 @@ class Target:
         return False
 
     def create(self, project_dir, target_name, dir_in_project, vars, update=False):
-        vars['{{TARGET}}'] = target_name
+        vars['{{TARGET}}'] = target_name.upper()
         tdir = os.path.join(project_dir, dir_in_project)
         basedir = os.path.dirname(tdir)
         if basedir != project_dir and not os.path.isdir(basedir):
