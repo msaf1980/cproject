@@ -1,2 +1,2 @@
-set(PROJECT {{ PROJECT }})
-set(VERSION {{ VERSION }})
+set(PROJECT {{PROJECT}})
+set(VERSION {{VERSION}})
