@@ -177,8 +177,6 @@ GitHub Actions and so it is used for coverage submission.
 
 ### clang-format
 
-[TODO]
-
 [clang-format][14] is part of the LLVM tool suite similar to
 [clang-tidy](#clang-tidy). It's a code linter and code formatter, which can be
 used to enforce style guides.

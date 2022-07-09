@@ -3,21 +3,12 @@ cmake_minimum_required(VERSION 3.14)
 include(${CMAKE_CURRENT_SOURCE_DIR}/settings.cmake)
 include(${CMAKE_CURRENT_SOURCE_DIR}/options.cmake)
 
-if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
-    message(
-        FATAL_ERROR
-            "In-source builds not allowed. Please make a new directory (called a build directory) and run CMake from there."
-    )
-endif()
-
 # Include cmake prescript from cmake_pre dir (before set project)
-# if(_CI_MODE)
-#     file(GLOB cmakeFiles cmake_pre/*.cmake)
-#     foreach(cmakeFile ${cmakeFiles})
-#         message("INCLUDE ${cmakeFile}")
-#         include(${cmakeFile})
-#     endforeach(cmakeFile)
-# endif()
+file(GLOB cmakeFiles cmake_pre/*.cmake)
+foreach(cmakeFile ${cmakeFiles})
+    message("INCLUDE ${cmakeFile}")
+    include(${cmakeFile})
+endforeach(cmakeFile)
 
 project(${PROJECT} VERSION ${VERSION})
 
