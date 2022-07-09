@@ -151,12 +151,23 @@ use the `docs` target. See issues [#41][19] and [#48][20].
 were instrumented with GCC's `gcov`. This coverage info can be used to see what
 parts of the program were executed.
 
-The generated projects will have a `coverage` target in developer mode if the
-`ENABLE_COVERAGE` variable is enabled. The reason why a separate target is used
+The generated projects will have a `coverage-zero` and `coverage` targets in developer mode if the
+`COVERAGE` variable is enabled. The reason why a separate target is used
 instead of CTest's built-in `coverage` step is because it lacks necessary
 customization. This target should be run after the tests and by default it will
 generate a report at `<binary-dir>/coverage.info` and an HTML report at the
-`<binary-dir>/coverage_html` directory.
+`<binary-dir>/coverage` directory, old report save in `<binary-dir>/coverage.old` directory.
+
+In example, Ninja is used (not required)
+```
+mkdir _build
+cd _build
+cmake -D COVERAGE=ON -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON -G Ninja ..
+cmake --build .
+cmake --build . --target coverage-zero
+ctest
+cmake --build . --target coverage
+```
 
 [TODO]
 **For Windows users**, you may use a similar tool called [OpenCppCoverage][17],
@@ -198,17 +209,20 @@ to fetch dependencies.
 
 ## Usage
 
-[TODO]
-* `cproject [--c] <path>`  
-  This command will create a CMake project at the provided location and
-  according to the answers given to the prompts. You may pass the `-s`, `-e` or
-  `-h` flags after to quickly create a shared library, executable or a header
-  only library respectively. The `--c` switch will set the generated project's
-  type to C instead of C++.
-* `cproject --vcpkg <name>`  
-  Generate a vcpkg port with the provided name in the `ports` directory to make
-  consuming dependencies not in any central package manager's repository
-  easier. This command must be run in a CMake project root tracked by git. See
-  the vcpkg example at the top of the README for more details.
-* `cproject --help`  
+* `cproject [-s TEMPLATE_DIR] list [PROJECT_TYPE]`  
+  This command will list projects with addons and targets.
+  For example list all CMake projects
+  
+  `cproject list cmake`
+* `cproject [-s TEMPLATE_DIR] new [-t TEMPLATE] [-T TARGET] [-a ADDON [-a ADDON2 ..]] project_dir[:project_name]`  
+  Generate a project (with optional addons). If project_name not set, dir basename is used
+  For example create CMake project with executable target and tests with catch2 (> 3.0.0)
+  
+  `cproject new -t cmake -a bin_cpp -a catch3 -a test_catch3_cpp app/test`
+* `cproject [-s TEMPLATE_DIR] addon [-p PROJECT_DIR] [ADDON ..]`
+  Add addons to existing project.
+  For example append to CMake project tests with catch2 (> 3.0.0)
+  
+  `cproject addon -p app/test catch3 test_catch3_cpp`
+* `cproject --help`
   Shows the help screen for more flags and switches.
