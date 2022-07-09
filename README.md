@@ -99,6 +99,8 @@ pip install  cproject
 
 ### clang-tidy
 
+[TODO]
+
 [clang-tidy][5] is a static analysis tool that helps you spot logical errors in
 your code before it is compiled. This script gives you the option to inherit
 the `clang-tidy` preset in your `dev` preset, enabling the CMake integration
@@ -113,6 +115,8 @@ reason for this is that only [Makefiles and Ninja][7] are supported with CMake
 for use with clang-tidy. For other generators, this feature is a no-op.
 
 ### cppcheck
+
+[TODO]
 
 [cppcheck][8] is a static analysis tool similar to clang-tidy, however the
 overlap in what they detect is minimal, so it's beneficial to use both of them.
@@ -130,20 +134,16 @@ for use with cppcheck. For other generators, this feature is a no-op.
 ### Doxygen
 
 [Doxygen][11] is a tool to generate documentation from annotated source code.
-In conjunction with it, [m.css][12] is used for presenting the generated
-documentation.
 
-The generated projects will have a `docs` target in developer mode, which can
+The generated projects will have a `dox` target in developer mode, which can
 be used to build the documentation into the `<binary-dir>/docs/html` directory.
 
 After Doxygen is installed, please make sure the `doxygen` executable exists in
 the `PATH`, otherwise you might get confusing error messages.
 
+[TODO]
 This documentation can be deployed to GitHub Pages using the `docs` job in the
 generated CI workflow. Follow the comments left in the job to enable this.
-
-**NOTE**: m.css does not work with Doxygen >= 1.9. You can install 1.8.20 to
-use the `docs` target. See issues [#41][19] and [#48][20].
 
 ### LCOV
 
@@ -177,6 +177,8 @@ GitHub Actions and so it is used for coverage submission.
 
 ### clang-format
 
+[TODO]
+
 [clang-format][14] is part of the LLVM tool suite similar to
 [clang-tidy](#clang-tidy). It's a code linter and code formatter, which can be
 used to enforce style guides.
@@ -188,6 +190,8 @@ the `format-check` and `format-fix` targets respectively.
 clang-format 12. Newer or older versions may format the project differently.
 
 ### codespell
+
+[TODO]
 
 [codespell][15] is a tool to find and fix spelling errors mainly in source
 code.
