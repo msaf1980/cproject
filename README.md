@@ -189,8 +189,6 @@ clang-format 12. Newer or older versions may format the project differently.
 
 ### codespell
 
-[TODO]
-
 [codespell][15] is a tool to find and fix spelling errors mainly in source
 code.
 

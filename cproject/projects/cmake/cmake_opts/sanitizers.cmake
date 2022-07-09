@@ -108,7 +108,7 @@ if(SANITIZER)
                         "This sanitizer not yet supported in the MSVC environment: ${SANITIZER}"
                 )
             endif()
-            message(STATUS "Enable with Undefined Behaviour sanitizer")
+            message(STATUS "Enable with Undefined Behavior sanitizer")
             add_compile_options(-fsanitize=undefined)
             list(APPEND SANITIZER_LIBS ubsan)
 

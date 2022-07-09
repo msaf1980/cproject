@@ -33,7 +33,7 @@ if(_CI_MODE)
     endforeach(cmakeFile)
 endif()
 
-# Include cmake script from cmake_dep dir (for setup dependecies)
+# Include cmake script from cmake_dep dir (for setup dependencies)
 file(GLOB cmakeFiles cmake_dep/*.cmake)
 foreach(cmakeFile ${cmakeFiles})
     message("INCLUDE ${cmakeFile}")

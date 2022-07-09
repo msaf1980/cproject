@@ -12,5 +12,5 @@ set(STDLIBS_LIST
 list(JOIN STDLIBS_LIST " " STDLIBS)
 set(LINK_STDLIB
     ""
-    CACHE STRING "Use libc++ as c/c++ standart library. Options are: ${STDLIBS}"
+    CACHE STRING "Use libc++ as c/c++ standard library. Options are: ${STDLIBS}"
 )

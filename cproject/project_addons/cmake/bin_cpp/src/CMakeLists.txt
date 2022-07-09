@@ -1,4 +1,4 @@
-#----------------- Executable taget e2_exe --------------------------------
+#----------------- Executable target {{PROJECT}}_exe --------------------------------
 set(
     {{PROJECT}}_LIBS
     ${OPTS_APP_LIBS}
@@ -21,4 +21,4 @@ install(
     COMPONENT Runtime
 )
 
-#----------------- Executable taget e2_exe --------------------------------
+#----------------- Executable target {{PROJECT}}_exe --------------------------------

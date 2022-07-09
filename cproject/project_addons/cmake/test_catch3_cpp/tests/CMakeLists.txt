@@ -1,6 +1,6 @@
 include(Catch)
 
-#----------------- Test taget {{PROJECT}}_test --------------------------------
+#----------------- Test target {{PROJECT}}_test --------------------------------
 set(
     {{PROJECT}}_TEST_LIBS
     Catch2::Catch2WithMain
@@ -20,4 +20,4 @@ target_link_libraries({{PROJECT}}_test PRIVATE ${{{PROJECT}}_TEST_LIBS})
 
 catch_discover_tests({{PROJECT}}_test)
 
-#----------------- Test taget {{PROJECT}}_test --------------------------------
+#----------------- Test target {{PROJECT}}_test --------------------------------
