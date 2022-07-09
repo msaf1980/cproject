@@ -310,7 +310,11 @@ class Projects:
                     else:
                         path = os.path.join(pdir, f)
                         if os.path.isdir(path):
-                            self.map[f] = Project.load(path)
+                            try:
+                                self.map[f] = Project.load(path)
+                            except Exception as e:
+                                sys.stderr.write(
+                                    "WARN: project load '{}' {}\n".format(path, str(e)))
 
     def names(self):
         return self.map
@@ -401,7 +405,11 @@ class ProjectAddons:
                         else:
                             path = os.path.join(tdir, f)
                             if os.path.isdir(path):
-                                t[f] = ProjectAddon.load(path)
+                                try:
+                                    t[f] = ProjectAddon.load(path)
+                                except Exception as e:
+                                    sys.stderr.write(
+                                        "WARN: project addon load '{}' {}\n".format(path, str(e)))
 
     def __len__(self):
         return len(self.map)
@@ -539,8 +547,12 @@ class Targets:
                         else:
                             path = os.path.join(tdir, f)
                             if os.path.isdir(path):
-                                t[f] = Target.load(
-                                    path, project_type)
+                                try:
+                                    t[f] = Target.load(
+                                        path, project_type)
+                                except Exception as e:
+                                    sys.stderr.write(
+                                        "WARN: project target load '{}' {}\n".format(path, str(e)))
 
     def get_project_types(self):
         return self.map.keys()
