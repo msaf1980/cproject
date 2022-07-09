@@ -156,7 +156,7 @@ The generated projects will have a `coverage-zero` and `coverage` targets in dev
 instead of CTest's built-in `coverage` step is because it lacks necessary
 customization. This target should be run after the tests and by default it will
 generate a report at `<binary-dir>/coverage.info` and an HTML report at the
-`<binary-dir>/coverage` directory, old report save in `<binary-dir>/coverage.old` directory.
+`<binary-dir>/coverage_report` directory, old report save in `<binary-dir>/coverage_report.old` directory.
 
 In example, Ninja is used (not required)
 ```

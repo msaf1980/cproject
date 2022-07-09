@@ -1,6 +1,6 @@
 option(COVERAGE "Enable test coverage" OFF)
 
-# Reports stored in ${CMAKE_BINARY_DIR}/coverage directory, old report saved in ${CMAKE_BINARY_DIR}/coverage.old
+# Reports stored in ${CMAKE_BINARY_DIR}/coverage_report directory, old report saved in ${CMAKE_BINARY_DIR}/coverage_report.old
 # In example, Ninja is used (not required) 
 ################################################################
 # mkdir _build
@@ -54,12 +54,7 @@ if(COVERAGE)
     if(NOT TARGET coverage-zero)
         add_custom_target(
             coverage-zero
-            COMMAND ${CMAKE_COMMAND} -E remove -f ${CMAKE_BINARY_DIR}/coverage
-            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        )
-        add_custom_target(
-            coverage-report-rm
-            COMMAND ${CMAKE_COMMAND} -E rm -rf ${CMAKE_BINARY_DIR}/coverage
+            COMMAND ${lcov_EXECUTABLE} --base-directory ${CMAKE_BINARY_DIR} --directory ${CMAKE_SOURCE_DIR} --zerocounters
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         )
 
@@ -83,7 +78,7 @@ if(COVERAGE)
 
         add_custom_target(
             coverage-report
-            COMMAND ${CMAKE_COMMAND} -E rename ${CMAKE_BINARY_DIR}/coverage ${CMAKE_BINARY_DIR}/coverage.old || true
+            COMMAND ${CMAKE_COMMAND} -E rename ${CMAKE_BINARY_DIR}/coverage_report ${CMAKE_BINARY_DIR}/coverage_report.old || true
             COMMAND
                 ${genhtml_EXECUTABLE} --output-directory ${CMAKE_BINARY_DIR}/coverage --title
                 "${META_PROJECT_NAME} Test Coverage" --num-spaces 4
