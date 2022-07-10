@@ -63,9 +63,19 @@ install(
     INCLUDES DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}"
 )
 
-# write_basic_package_version_file(
-#     "${package}ConfigVersion.cmake"
-#     COMPATIBILITY SameMajorVersion
-# )
+write_basic_package_version_file(
+    "${package}ConfigVersion.cmake"
+    COMPATIBILITY SameMajorVersion
+)
+
+# Allow package maintainers to freely override the path for the configs
+set(
+    {{PROJECT}}_INSTALL_CMAKEDIR "${CMAKE_INSTALL_LIBDIR}/cmake"
+    CACHE PATH "CMake package config location relative to the install prefix"
+)
+mark_as_advanced({{PROJECT}}_INSTALL_CMAKEDIR)
+
+# include(CMakeFindDependencyMacro)
+# find_dependency(fmt)
 
 # ---- Declare shared library {{PROJECT}} ----

@@ -25,7 +25,7 @@ foreach(cmakeFile ${cmakeFiles})
 endforeach(cmakeFile)
 
 # Include cmake script from cmake_autoload dir (after set project)
-if(_CI_MODE)
+if(MAIN_PROJECT)
     file(GLOB cmakeFiles cmake_opts/*.cmake)
     foreach(cmakeFile ${cmakeFiles})
         message("INCLUDE ${cmakeFile}")
