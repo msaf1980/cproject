@@ -1,1 +1,1 @@
-description: Static/shared library target (C++) (in src directory of CMake project root, target is a <project_name>, for build shared lib, pass BUILD_SHARED_LIBS=ON option)
+description: Static/shared library target (C++) (in src dir of CMake project root, for build shared lib, pass BUILD_SHARED_LIBS=ON option)

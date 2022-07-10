@@ -603,7 +603,7 @@ def project_addons_print(project_type, project_addon_templates):
                 'Proj. type', 'Project addons template', 'Path', 'Description'))
             sys.stdout.write(
                 '----------------------------------------------------------------------------------------------------------------------------\n')
-            for target in ts:
+            for target in sorted(ts):
                 v = ts[target]
                 sys.stdout.write('{:<10} | {:<30} | {:<50} | {}\n'.format(
                     v.project_type, v.name, v.path, v.description))
@@ -649,7 +649,7 @@ def project_targets_print(project_type, target_templates):
                 'Proj. type',  'Target template', 'Path', 'Description'))
             sys.stdout.write(
                 '----------------------------------------------------------------------------------------------------------------------------\n')
-            for target in ts:
+            for target in sorted(ts):
                 vt = ts[target]
                 sys.stdout.write('{:<10} | {:<30} | {:<50} | {}\n'.format(
                     vt.project_type, vt.name, vt.path, vt.description))
@@ -864,7 +864,8 @@ def main():
         projects_by_types_print(set(
             args.project_type),  project_templates, project_addon_templates, target_templates)
     else:
-        for project in project_templates.projects():
+        for name in project_templates.names():
+            project = project_templates.get(name)
             project_print(project,
                           project_addon_templates, target_templates)
 

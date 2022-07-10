@@ -1,1 +1,1 @@
-description: Header-only library target (C++) (in include directory of CMake project root, target is a <project_name>_<project_name>)
+description: Header-only library target (C++) (in include dir of CMake project root)
