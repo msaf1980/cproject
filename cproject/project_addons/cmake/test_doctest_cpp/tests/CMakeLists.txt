@@ -2,6 +2,7 @@ include_directories("${doctest_SOURCE_DIR}/doctest")
 #----------------- Test target {{PROJECT}}_test --------------------------------
 set(
     {{PROJECT}}_TEST_LIBS
+    # {{PROJECT}}::{{PROJECT}}
     ${OPTS_TEST_LIBS}
 )
 
