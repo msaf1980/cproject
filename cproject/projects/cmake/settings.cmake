@@ -1,5 +1,7 @@
 set(PROJECT {{PROJECT}})
 set(VERSION {{VERSION}})
+set(HOMEPAGE_URL)
+set(DESCRIPTION)
 
 SET(CXX_STD_VERSION{%if {{ CXX_STD }} %} {{ CXX_STD }}{%endif%})
 SET(CXX_STD{%if {{ CXX_STD }} %} -std=c++{{ CXX_STD }}{%endif%})

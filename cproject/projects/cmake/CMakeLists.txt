@@ -10,7 +10,12 @@ foreach(cmakeFile ${cmakeFiles})
     include(${cmakeFile})
 endforeach(cmakeFile)
 
-project(${PROJECT} VERSION ${VERSION})
+project(
+    ${PROJECT}
+    HOMEPAGE_URL "${PROJECT_URL}"
+    DESCRIPTION "${DESCRIPTION}"
+    VERSION ${VERSION}
+)
 
 include(CMakePackageConfigHelpers)
 include(GNUInstallDirs)
