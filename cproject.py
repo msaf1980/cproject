@@ -798,7 +798,7 @@ def main():
         notFound = require_not_found(p.path, addons.values())
         if len(notFound) > 0:
             sys.stdout.write(
-                "Some requirements not found in selected project/addons\n")
+                "Some requirements not found in selected project/addons: {}\n".format(str(notFound)))
             project_addon_with_files_print(
                 p.project_type, project_addon_templates, notFound)
             sys.exit(1)
