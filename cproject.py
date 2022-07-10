@@ -269,8 +269,10 @@ class Project:
         return os.path.exists(os.path.join(self.path, path))
 
     def create(self, project_dir, project_name, vars, update=False):
-        vars['{{PROJECT}}'] = project_name.lower().replace(
+        pname = project_name.lower().replace(
             '-', '_').replace(' ', '_')
+        vars['{{PROJECT}}'] = pname
+        vars['{{UC_PROJECT}}'] = pname.upper()
         if update:
             sys.stdout.write("Updating project {} in {}\n".format(
                 project_name, project_dir))
@@ -495,8 +497,10 @@ class Target:
         return False
 
     def create(self, project_dir, target_name, dir_in_project, vars, update=False):
-        vars['{{TARGET}}'] = target_name.upper().replace(
+        tname = target_name.upper().replace(
             '-', '_').replace(' ', '_')
+        vars['{{TARGET}}'] = tname
+        vars['{{UC_TARGET}}'] = tname.upper()
         tdir = os.path.join(project_dir, dir_in_project)
         basedir = os.path.dirname(tdir)
         if basedir != project_dir and not os.path.isdir(basedir):
@@ -698,7 +702,7 @@ def parse_cmdline(template_dirs):
         description='C/C++ project generator (not only for CMake)', formatter_class=RawTextHelpFormatter)
 
     parser.add_argument('-V', '--version', dest='version',
-                        action='store', default='0.1', help='project version')
+                        action='store', default='0.1.0', help='project version')
     parser.add_argument('-q', '--quiet', dest='quiet', action='store_true', default=False,
                         help='non-interactive mode')
     parser.add_argument('-s', '--templates', type=str, dest='template_dir', action='store', default=None,

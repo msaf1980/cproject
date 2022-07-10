@@ -21,6 +21,8 @@ template_dir = os.path.join(root_dir, 'cproject')
 
 build_subdir = '_build'
 
+VERSION_DEFAULT = '0.1.0'
+
 cmake = os.environ.get('CPROJECT_CMAKE', 'cmake')
 
 
@@ -50,7 +52,7 @@ def test_cmake_new_project_and_add_addons():
         project_dir).replace('-', '_').replace(' ', '_')
 
     assert vars['{{PROJECT}}'] == want_project_name
-    assert vars['{{VERSION}}'] == '0.1'
+    assert vars['{{VERSION}}'] == VERSION_DEFAULT
 
     os.mkdir(build_dir)
     os.chdir(build_dir)
@@ -155,7 +157,7 @@ def test_cmake_new_project_with_addons():
         project_dir).replace('-', '_').replace(' ', '_')
 
     assert vars['{{PROJECT}}'] == want_project_name
-    assert vars['{{VERSION}}'] == '0.1'
+    assert vars['{{VERSION}}'] == VERSION_DEFAULT
 
     dirs = ['src', 'include']
     for d in dirs:

@@ -25,4 +25,10 @@ install(
     COMPONENT Development
 )
 
+# write_basic_package_version_file(
+#     "${package}ConfigVersion.cmake"
+#     COMPATIBILITY SameMajorVersion
+#     ARCH_INDEPENDENT
+# )
+
 # ---- Declare header-only library {{PROJECT}} ----

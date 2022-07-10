@@ -16,7 +16,7 @@ def test_cmake_load_vars():
 
     want = {
         '{{PROJECT}}': 'test',
-        '{{VERSION}}': '0.1'
+        '{{VERSION}}': '0.1.0'
     }
 
     got = cproject.CMake.load_vars(

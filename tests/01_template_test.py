@@ -15,12 +15,12 @@ def test_template_simple():
     s = r'set(PROJECT {{PROJECT}})\nset(VERSION {{VERSION}})\nset(PROJECT_COMPILE_FEATURES cxx_std_{{CXX_STD}} c_std_{{C_STD}})\n'
     vars = {
         '{{PROJECT}}': 'test',
-        '{{VERSION}}': '0.1',
+        '{{VERSION}}': '0.1.0',
         '{{CXX_STD}}': '17',
         '{{C_STD}}': '11',
     }
 
-    want = r'set(PROJECT test)\nset(VERSION 0.1)\nset(PROJECT_COMPILE_FEATURES cxx_std_17 c_std_11)\n'
+    want = r'set(PROJECT test)\nset(VERSION 0.1.0)\nset(PROJECT_COMPILE_FEATURES cxx_std_17 c_std_11)\n'
 
     got = cproject.Template.render(s, vars)
     assert got == want
