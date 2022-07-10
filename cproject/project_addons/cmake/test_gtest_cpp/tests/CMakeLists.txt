@@ -1,8 +1,10 @@
-include_directories("${doctest_SOURCE_DIR}/doctest")
+include(GoogleTest)
+
 #----------------- Test target {{PROJECT}}_test --------------------------------
 set(
     {{PROJECT}}_TEST_LIBS
     # {{PROJECT}}::{{PROJECT}}
+    gtest_main
     ${OPTS_TEST_LIBS}
 )
 
@@ -17,7 +19,7 @@ set_target_properties(
 target_compile_features({{PROJECT}}_test PRIVATE ${CXX_COMPILE_FEATURES})
 target_link_libraries({{PROJECT}}_test PRIVATE ${{{PROJECT}}_TEST_LIBS})
 
-add_test(NAME {{PROJECT}}_test COMMAND $<TARGET_FILE:{{PROJECT}}_test>)
+gtest_discover_tests({{PROJECT}}_test)
 
 # set_tests_properties({{PROJECT}}_test PROPERTIES DEPENDS {{PROJECT}})
 
