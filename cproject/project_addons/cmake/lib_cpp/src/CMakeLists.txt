@@ -1,8 +1,13 @@
 # ---- Declare shared library {{PROJECT}} ----
 
+set(
+    {{PROJECT}}_{{PROJECT}}_SRC
+    main.cpp
+)
+
 add_library(
     {{PROJECT}}_{{PROJECT}}
-    {{PROJECT}}.cpp
+    ${{{PROJECT}}_{{PROJECT}}_SRC}
 )
 add_library({{PROJECT}}::{{PROJECT}} ALIAS {{PROJECT}}_{{PROJECT}})
 

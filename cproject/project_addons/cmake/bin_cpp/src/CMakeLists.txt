@@ -4,7 +4,12 @@ set(
     ${OPTS_APP_LIBS}
 )
 
-add_executable({{PROJECT}}_exe main.cpp)
+set(
+    {{PROJECT}}_SRC
+    main.cpp
+)
+
+add_executable({{PROJECT}}_exe ${{{PROJECT}}_SRC})
 add_executable({{PROJECT}}::exe ALIAS {{PROJECT}}_exe)
 
 set_target_properties(
