@@ -46,7 +46,7 @@ target_include_directories(
     "$<BUILD_INTERFACE:${PROJECT_BINARY_DIR}/export>"
 )
 
-target_compile_features({{PROJECT}}_{{PROJECT}} PUBLIC ${CXX_COMPILE_FEATURES})
+#target_compile_features({{PROJECT}}_{{PROJECT}} PUBLIC ${CXX_COMPILE_FEATURES})
 
 # find_package(fmt REQUIRED)
 # target_link_libraries({{PROJECT}}_{{PROJECT}} PRIVATE fmt::fmt)

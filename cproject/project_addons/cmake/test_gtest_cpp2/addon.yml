@@ -1,0 +1,3 @@
+description: Tests with GTest (C++) (in tests directory of CMake project root, target is a project name, for one binary for all tests)
+require:
+ - cmake_dep/GTest.cmake

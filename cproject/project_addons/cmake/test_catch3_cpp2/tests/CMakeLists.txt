@@ -1,14 +1,19 @@
-include(GoogleTest)
+include(Catch)
 
 #----------------- Test target {{PROJECT}}_test --------------------------------
 set(
     {{PROJECT}}_TEST_LIBS
     # {{PROJECT}}::{{PROJECT}}
-    gtest_main
+    Catch2::Catch2WithMain
     ${OPTS_TEST_LIBS}
 )
 
-add_executable({{PROJECT}}_test {{PROJECT}}_test.cpp)
+set(
+    {{PROJECT}}_TEST_SRC
+    main_test.cpp
+)
+
+add_executable({{PROJECT}}_test ${{{PROJECT}}_TEST_SRC})
 add_executable({{PROJECT}}::test ALIAS {{PROJECT}}_test)
 
 set_target_properties(
@@ -19,7 +24,7 @@ set_target_properties(
 #target_compile_features({{PROJECT}}_test PRIVATE ${CXX_COMPILE_FEATURES})
 target_link_libraries({{PROJECT}}_test PRIVATE ${{{PROJECT}}_TEST_LIBS})
 
-gtest_discover_tests({{PROJECT}}_test)
+catch_discover_tests({{PROJECT}}_test)
 
 # set_tests_properties({{PROJECT}}_test PROPERTIES DEPENDS {{PROJECT}})
 

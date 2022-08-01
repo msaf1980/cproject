@@ -13,7 +13,7 @@ set_target_properties(
     EXPORT_NAME {{PROJECT}}_app
 )
 
-target_compile_features({{PROJECT}}_app PRIVATE ${CXX_COMPILE_FEATURES})
+#target_compile_features({{PROJECT}}_app PRIVATE ${CXX_COMPILE_FEATURES})
 target_link_libraries({{PROJECT}}_app PRIVATE ${{{PROJECT}}_LIBS})
 
 install(

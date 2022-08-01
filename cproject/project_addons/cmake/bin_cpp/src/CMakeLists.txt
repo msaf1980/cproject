@@ -18,7 +18,7 @@ set_target_properties(
     EXPORT_NAME {{PROJECT}}_exe
 )
 
-target_compile_features({{PROJECT}}_exe PRIVATE ${CXX_COMPILE_FEATURES})
+#target_compile_features({{PROJECT}}_exe PRIVATE ${CXX_COMPILE_FEATURES})
 target_link_libraries({{PROJECT}}_exe PRIVATE ${{{PROJECT}}_LIBS})
 
 install(

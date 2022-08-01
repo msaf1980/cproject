@@ -707,9 +707,9 @@ def parse_cmdline(template_dirs):
                         help='non-interactive mode')
     parser.add_argument('-s', '--templates', type=str, dest='template_dir', action='store', default=None,
                         help='template dir (default in %s)' % str(template_dirs))
-    parser.add_argument('-C', '--cxx-std', dest='cxx_std',
+    parser.add_argument('-C', '--cxx-std', dest='cxx_std', default='17',
                         action='store', type=int, help='Pass C++ standart version as CXX_STD variable (for example 11, 17, 20 or 23)')
-    parser.add_argument('-c', '--c-std', dest='c_std',
+    parser.add_argument('-c', '--c-std', dest='c_std', default='11',
                         action='store', type=int, help='Pass C standart version as C_STD variable (for example 99, 11, 17, 20 or 23)')
     # parser.add_argument('-o', '--option', dest='option', default=None,
     #                     action='append', help='install optional option files (from _optional/OPTIONAL subdirs)')

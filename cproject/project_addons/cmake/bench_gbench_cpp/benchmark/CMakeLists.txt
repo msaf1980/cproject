@@ -14,7 +14,7 @@ set_target_properties(
     OUTPUT_NAME bench_{{PROJECT}}
 )
 
-target_compile_features({{PROJECT}}_bench PRIVATE ${CXX_COMPILE_FEATURES})
+#target_compile_features({{PROJECT}}_bench PRIVATE ${CXX_COMPILE_FEATURES})
 target_link_libraries({{PROJECT}}_bench PRIVATE ${{{PROJECT}}_BENCH_LIBS})
 
 custom_add_bench({{PROJECT}}_bench)

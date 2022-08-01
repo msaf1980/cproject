@@ -14,7 +14,7 @@ target_include_directories(
     "$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>"
 )
 
-target_compile_features({{PROJECT}}_{{PROJECT}} INTERFACE ${CXX_COMPILE_FEATURES})
+#target_compile_features({{PROJECT}}_{{PROJECT}} INTERFACE ${CXX_COMPILE_FEATURES})
 
 # find_package(fmt REQUIRED)
 # target_link_libraries({{PROJECT}}_{{PROJECT}} INTERFACE fmt::fmt)

@@ -8,7 +8,12 @@ set(
     ${OPTS_TEST_LIBS}
 )
 
-add_executable({{PROJECT}}_test {{PROJECT}}_test.cpp)
+set(
+    {{PROJECT}}_TEST_SRC
+    main_test.cpp
+)
+
+add_executable({{PROJECT}}_test ${{{PROJECT}}_TEST_SRC})
 add_executable({{PROJECT}}::test ALIAS {{PROJECT}}_test)
 
 set_target_properties(

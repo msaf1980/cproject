@@ -14,7 +14,7 @@ set_target_properties(
     OUTPUT_NAME test_{{PROJECT}}
 )
 
-target_compile_features({{PROJECT}}_test PRIVATE ${CXX_COMPILE_FEATURES})
+#target_compile_features({{PROJECT}}_test PRIVATE ${CXX_COMPILE_FEATURES})
 target_link_libraries({{PROJECT}}_test PRIVATE ${{{PROJECT}}_TEST_LIBS})
 
 add_test(NAME {{PROJECT}}_test COMMAND $<TARGET_FILE:{{PROJECT}}_test>)
